@@ -291,7 +291,7 @@ function scene:create( event )
 		},
 	}
 	local crate = display.newSprite( crateImageSheet, crateSequenceData )
-	crate.x, crate.y = 300, 100
+	crate.x, crate.y = 300, 700
 	crate.isFixedRotation = true
 	crate.name = "crate"
 	crate.grounded = false
@@ -421,8 +421,8 @@ function scene:create( event )
 	physics.addBody( button2, "static", { friction=0.3 } )
 
 	-- Position the omskites
-	local omskite1 = generateOmskite( 200, 100)
-	local omskite2 = generateOmskite( 1600, 500)
+	local omskite1 = generateOmskite( 200, 720)
+	local omskite2 = generateOmskite( 1600, 720)
 	
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )

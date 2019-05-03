@@ -252,7 +252,13 @@ function onKeyEvent( event )
     -- Print which key was pressed down/up
     local message = "Key '" .. event.keyName .. "' was pressed " .. event.phase
 	--print( message )
-	if ( event.keyName == "x" ) and ( event.phase == "up" ) then
+	if ( event.keyName == "r" ) and ( event.phase == "up" ) then
+		timer.performWithDelay( 200, function()
+			physics.stop()
+			scene:destroy()
+			composer.gotoScene( "level5", "fade", 500 )	
+		end )
+	elseif ( event.keyName == "x" ) and ( event.phase == "up" ) then
 		print("Raycasting")
 		--print( velocity )
 		local detectorX = physics.rayCast( globalObjects[1].x-detectorDistance, globalObjects[1].y, globalObjects[1].x+detectorDistance, globalObjects[1].y, "sorted" )
@@ -424,7 +430,7 @@ function scene:create( event )
 
 	local crate = display.newSprite( crateImageSheet, crateSequenceData )
 	--local crate = display.newImageRect( "crate.png", 90, 90 )
-	crate.x, crate.y = 300, 100
+	crate.x, crate.y = 200, 600
 	crate.isFixedRotation = true
 	crate.name = "crate"
 	crate.grounded = false
@@ -503,7 +509,7 @@ function scene:create( event )
 	--local omskite4 = generateOmskite( 1250, 100)
 
 	-- Generate enemy
-	local enemy1 = generateEnemy( 350, 50)
+	local enemy1 = generateEnemy( 380, 700)
 
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
@@ -579,7 +585,7 @@ function scene:destroy( event )
 	physics = nil
 	globalObjects = nil
 
-	composer.removeScene("level3")
+	composer.removeScene("level5")
 
 end
 

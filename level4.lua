@@ -136,7 +136,14 @@ function onKeyEvent( event )
     -- Print which key was pressed down/up
     local message = "Key '" .. event.keyName .. "' was pressed " .. event.phase
 	--print( message )
-	if ( event.keyName == "x" ) and ( event.phase == "up" ) then
+	if ( event.keyName == "r" ) and ( event.phase == "up" ) then
+		globalObjects[5]:removeSelf()
+		timer.performWithDelay( 200, function()
+			physics.stop()
+			scene:destroy()
+			composer.gotoScene( "level4", "fade", 500 )	
+		end )
+	elseif ( event.keyName == "x" ) and ( event.phase == "up" ) then
 		print("Raycasting")
 		--print( velocity )
 		local detectorX = physics.rayCast( globalObjects[1].x-detectorDistance, globalObjects[1].y, globalObjects[1].x+detectorDistance, globalObjects[1].y, "sorted" )
@@ -306,7 +313,7 @@ function scene:create( event )
 		},
 	}
 	local crate = display.newSprite( crateImageSheet, crateSequenceData )
-	crate.x, crate.y = 300, 100
+	crate.x, crate.y = 300, 450
 	crate.isFixedRotation = true
 	crate.name = "crate"
 	crate.grounded = false
@@ -409,7 +416,7 @@ function scene:create( event )
 	physics.addBody( block2, "static", { friction=1 } )
 
 	-- Position the omskites
-	local omskite1 = generateOmskite( 650, 800)
+	local omskite1 = generateOmskite( 650, 1090)
 
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
